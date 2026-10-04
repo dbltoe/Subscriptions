@@ -1,0 +1,28 @@
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.idea/
+.vscode/
+*.code-workspace
+
+# Build / scratch
+tmp/
+dist/
+
+*.log
+*.bak
+*.orig
+*.rej
+
+# Archives produced when packaging a release
+*.zip
+*.tar.gz
+
+# Maintainer tooling -- kept local, never shipped.
+# The release package excludes these anyway (tools/build_package.ps1 copies only
+# the plugin, docs/ and readme.html), so this keeps them out of the repo as well.
+tests/
+tools/

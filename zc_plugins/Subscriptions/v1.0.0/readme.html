@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Subscriptions for Zen Cart: Read Me</title>
+<style>
+:root{--ink:#1d2329;--muted:#55606b;--line:#d8dee4;--panel:#f6f8fa;--link:#0a58ca;--note:#fff8e1;--noteline:#e0c060;--bg:#fff}
+@media (prefers-color-scheme:dark){:root{--ink:#e6e9ec;--muted:#a9b2bb;--line:#3a434c;--panel:#20262c;--link:#7fb2ff;--note:#2e2a1c;--noteline:#7a6a30;--bg:#161b20}}
+body{font:16px/1.6 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);max-width:52em;margin:0 auto;padding:16px}
+h1{font-size:1.8em;margin:.2em 0}
+h2{font-size:1.35em;margin:2em 0 .5em;padding-bottom:.25em;border-bottom:1px solid var(--line)}
+h3{font-size:1.1em;margin:1.4em 0 .4em}
+a{color:var(--link)}
+code,pre{font-family:Menlo,Consolas,monospace;font-size:.9em;background:var(--panel);border-radius:3px}
+code{padding:.1em .3em;overflow-wrap:anywhere}
+pre{padding:.7em 1em;white-space:pre-wrap;word-break:break-all}
+table{border-collapse:collapse;width:100%;margin:.5em 0 1em}
+th,td{border:1px solid var(--line);padding:.4em .6em;text-align:left;vertical-align:top}
+th{background:var(--panel)}
+.lead{color:var(--muted)}
+.note{background:var(--note);border-left:4px solid var(--noteline);padding:.6em 1em;margin:1em 0}
+nav ol{columns:2;column-gap:2em;padding-left:1.4em}
+@media (max-width:600px){nav ol{columns:1}}
+</style>
+</head>
+<body>
+
+<h1>Subscriptions for Zen Cart</h1>
+<p class="lead">Version 1.0.0 for Zen Cart 1.5.8 through 3.0.0 on PHP 7.4 through 8.5. Free software (GPL v2) by My Zen Cart Host (dbltoe).</p>
+
+<nav aria-label="Contents">
+<h2 id="contents">Contents</h2>
+<ol>
+<li><a href="#what">What it does</a></li>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#installing">Installing</a></li>
+<li><a href="#scheduler">Setting up the scheduler</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#products">Setting up a product</a></li>
+<li><a href="#storefront">What the customer sees</a></li>
+<li><a href="#my-subscriptions">My Subscriptions</a></li>
+<li><a href="#renewals">How renewals work</a></li>
+<li><a href="#admin">Customers &gt; Subscriptions</a></li>
+<li><a href="#emails">The emails</a></li>
+<li><a href="#laws">Auto-renewal laws</a></li>
+<li><a href="#payment">Payment modules and Subscriptions Pro</a></li>
+<li><a href="#customizing">Customizing</a></li>
+<li><a href="#translating">Translating</a></li>
+<li><a href="#zc30">Zen Cart 3.0 notes</a></li>
+<li><a href="#upgrading">Upgrading</a></li>
+<li><a href="#uninstalling">Uninstalling</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#support">Support and license</a></li>
+</ol>
+</nav>
+
+<h2 id="what">What it does</h2>
+<p>Subscriptions lets you sell products as subscriptions: coffee every two weeks, filters every three months, anything your customers buy again and again.</p>
+<ul>
+<li>On the product page the customer picks <strong>One-Time Purchase</strong> or a delivery interval such as <strong>Every 2 Weeks</strong>, with an optional subscribe-and-save discount.</li>
+<li>At checkout they agree to your subscription terms, and the order starts the subscription.</li>
+<li>Before each renewal they get an email with a <strong>Renew Now</strong> link. It fills their cart and they check out as usual, with any payment module you have.</li>
+<li>They can skip, pause, resume, change the interval or quantities, and cancel from <strong>My Subscriptions</strong> in their account.</li>
+<li>You see and manage every subscription under <strong>Customers &gt; Subscriptions</strong>.</li>
+</ul>
+<p>This plugin never charges anyone automatically. Charging a saved card automatically is planned for a paid add-on, <a href="#payment">Subscriptions Pro</a>.</p>
+<p>It changes no core file and no template file. The delivery choice is an ordinary product option the plugin manages, so every template already knows how to show it.</p>
+
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>Zen Cart 1.5.8a, 2.0.x, 2.1.0, 2.2.x, 2.3.x or 3.0.0.</li>
+<li>PHP 7.4 through 8.5.</li>
+<li>A way to open a web address once an hour: a cron job (every cPanel host has one) or an outside cron service. See <a href="#scheduler">Setting up the scheduler</a>.</li>
+<li>Customers need an account to subscribe. Guest checkout still works for everything else.</li>
+</ul>
+
+<h2 id="installing">Installing</h2>
+<ol>
+<li>Upload the <code>zc_plugins/Subscriptions</code> folder from this package into your store's <code>zc_plugins</code> folder, so you have <code>zc_plugins/Subscriptions/v1.0.0/manifest.php</code>.</li>
+<li>In the admin, go to <strong>Modules &gt; Plugin Manager</strong>, select <strong>Subscriptions</strong> and click <strong>Install</strong>.</li>
+<li>Set up the hourly scheduler (<a href="#scheduler">next section</a>).</li>
+<li>Check the settings under <strong>Configuration &gt; Subscriptions</strong>, especially <strong>Subscription Terms</strong>.</li>
+<li>Turn subscriptions on for a product (<a href="#products">Setting up a product</a>).</li>
+</ol>
+<p>The installer creates five tables (<code>subscriptions</code>, <code>subscriptions_products</code>, <code>subscriptions_history</code>, <code>subscriptions_intervals</code> and <code>products_subscription</code>, each with your table prefix), a product option named <strong>Delivery</strong>, the settings, and the admin page. If a table of the same name already exists and belongs to something else, it stops before writing anything and tells you.</p>
+
+<h2 id="scheduler">Setting up the scheduler</h2>
+<p>Zen Cart has no scheduler of its own, so the plugin answers on a secret address that something has to open once an hour. Each run sends the renewal reminders that are due and moves on any renewals that weren't placed in time.</p>
+<p>The address and a ready-made cron command are on <strong>Customers &gt; Subscriptions</strong> (open <strong>Scheduler Setup</strong>) and in the description of <strong>Configuration &gt; Subscriptions &gt; Scheduler Key</strong>. The command looks like this:</p>
+<pre>curl -fsSL "https://www.example.com/index.php?main_page=subscriptions_cron&amp;key=YOUR-KEY" &gt;/dev/null</pre>
+<h3 id="scheduler-cpanel">With cPanel</h3>
+<ol>
+<li>Open <strong>Cron Jobs</strong>.</li>
+<li>Under <strong>Common Settings</strong> choose <strong>Once Per Hour</strong>.</li>
+<li>Paste the command from your admin into <strong>Command</strong> and click <strong>Add New Cron Job</strong>.</li>
+</ol>
+<h3 id="scheduler-outside">Without cron</h3>
+<p>Any outside cron service that can open a web address on a schedule will do. Give it the address (without <code>curl</code>) and set it to hourly.</p>
+<h3 id="scheduler-check">Checking it</h3>
+<ul>
+<li><strong>Customers &gt; Subscriptions</strong> shows when the scheduler last ran, in red when it hasn't run for three hours.</li>
+<li><strong>Run Renewals Now</strong> on the same page runs it in a new tab and shows what it did. It's safe any time: each reminder is sent once.</li>
+<li>A wrong or missing key gets a bare <em>Forbidden</em>. Keep the key to yourself.</li>
+</ul>
+<div class="note">While your store is in Down for Maintenance, or set so customers must log in before browsing, the scheduler can't run either. Reminders wait until the store is open.</div>
+
+<h2 id="configuration">Configuration</h2>
+<p><strong>Configuration &gt; Subscriptions</strong>:</p>
+<table>
+<thead><tr><th scope="col">Setting</th><th scope="col">What it does</th></tr></thead>
+<tbody>
+<tr><td>Offer Subscriptions on Product Pages?</td><td>When false, the Delivery choice comes off every product page. Existing subscriptions keep renewing. Default true.</td></tr>
+<tr><td>Intervals Offered</td><td>The intervals you can tick on a product, separated by commas: <code>1 week, 2 weeks, 1 month, 2 months, 3 months</code> by default. Use a number and day, week or month, up to 365 days, 52 weeks or 12 months.</td></tr>
+<tr><td>Default Subscribe-and-Save Discount (%)</td><td>Filled in when you first turn subscriptions on for a product. 0 for none, at most 90.</td></tr>
+<tr><td>Reminder E-Mail, Days Before Renewal</td><td>How many days ahead of each renewal the Renew Now email goes out. Default 3, from 0 (on the day) to 60.</td></tr>
+<tr><td>Subscription Terms</td><td>Shown beside the consent box at checkout and repeated in the signup email. The exact text each customer agreed to is saved with their subscription. Write it for your store; see <a href="#laws">Auto-renewal laws</a>.</td></tr>
+<tr><td>Delete Subscription Data on Uninstall?</td><td>Default false: uninstalling keeps every subscription so a reinstall carries on. See <a href="#uninstalling">Uninstalling</a>.</td></tr>
+<tr><td>Delivery Option ID</td><td>The product option the plugin manages. You can rename it in the Option Name Manager; don't delete it.</td></tr>
+<tr><td>Product Pages Last Updated For</td><td>Maintained by the plugin.</td></tr>
+<tr><td>Scheduler Key</td><td>The secret in the scheduler address, made at install. Its description has your cron command.</td></tr>
+<tr><td>Scheduler Last Ran</td><td>Set by the scheduler each time it runs.</td></tr>
+</tbody>
+</table>
+
+<h2 id="products">Setting up a product</h2>
+<p>Edit the product in <strong>Catalog &gt; Categories/Products</strong>. Below the usual fields there's a <strong>Subscription</strong> panel:</p>
+<ul>
+<li><strong>Subscription</strong>: Off (one-time purchase only), Optional (the customer chooses one-time or an interval) or Required (sold as a subscription only).</li>
+<li><strong>Intervals Offered</strong>: tick the intervals this product is sold at, from your store-wide list.</li>
+<li><strong>Subscribe-and-Save Discount</strong>: a percentage off the product price, or its sale price, on every subscription delivery. The customer sees it beside each interval.</li>
+<li><strong>Number of Deliveries</strong>: 0 to continue until the customer cancels, or a number to end the subscription after that many deliveries, the first order included.</li>
+</ul>
+<p>Save (through the preview, as usual) and the product page shows the <strong>Delivery</strong> choice. With Optional, One-Time Purchase comes first and is selected; with Required, the shortest interval is.</p>
+<p>Don't edit the Delivery rows by hand in the Attributes Controller. The plugin rebuilds them from the panel and would put them back.</p>
+
+<h2 id="storefront">What the customer sees</h2>
+<ul>
+<li><strong>Product page</strong>: a Delivery dropdown such as <em>One-Time Purchase</em>, <em>Every 2 Weeks ( -$0.40 )</em>, <em>Every Month ( -$0.40 )</em>. The cart, checkout and order show the choice like any other option.</li>
+<li><strong>An account</strong>: while a subscription is in the cart, One Page Checkout's guest option is switched off and a guest is asked to log in or create an account.</li>
+<li><strong>Consent</strong>: on the payment step, your Subscription Terms with a required checkbox. If it isn't ticked, the order isn't placed. If the customer changes the subscription part of the cart afterward, they're asked again.</li>
+<li><strong>Signup email</strong>: right after the order confirmation, with the subscription's items, interval, price at today's prices, next renewal date, the terms they agreed to, and a link to My Subscriptions.</li>
+</ul>
+
+<h2 id="my-subscriptions">My Subscriptions</h2>
+<p>Customers with a subscription get a <em>View or change my subscriptions.</em> link on My Account. The page lists each subscription with its items, next delivery and deliveries so far, and lets them:</p>
+<ul>
+<li><strong>Renew Now</strong>, once the reminder for the next delivery is due.</li>
+<li><strong>Skip Next Delivery</strong>, <strong>Pause</strong> and <strong>Resume</strong>. A resumed subscription picks up on its schedule after today; deliveries that fell in the pause aren't sent late.</li>
+<li><strong>Change Interval</strong>, to any interval every product in the subscription is still offered at, from the next delivery on.</li>
+<li><strong>Update Quantities</strong>, 1 to 999 each.</li>
+<li><strong>Cancel Subscription</strong>, with a confirmation step and an optional reason. Pausing and canceling are confirmed by email.</li>
+</ul>
+
+<h2 id="renewals">How renewals work</h2>
+<ol>
+<li><strong>The reminder.</strong> The set number of days before a delivery is due, the scheduler emails a Renew Now link.</li>
+<li><strong>Renew Now.</strong> The link, or the button on My Subscriptions, puts the subscription's items in the cart with the same options as last time and the subscribe-and-save price. A customer who isn't logged in logs in first and comes straight back.</li>
+<li><strong>Checkout as usual.</strong> Today's prices, today's shipping, any payment module. No second consent is asked for.</li>
+<li><strong>The order renews the subscription.</strong> It moves to its next date, the delivery is counted, and the order gets an admin-only note: <em>Renewal of subscription #12 (Every Month), delivery due ...</em>. The customer gets your normal order confirmation.</li>
+</ol>
+<h3 id="renewals-missed">Renewals that aren't placed</h3>
+<p>The link works until the next delivery's reminder is due (for intervals shorter than the reminder lead, until the day after the due date). A delivery not ordered by then is skipped, the subscription moves to its next date, and the customer is reminded about that one.</p>
+<p>After <strong>three</strong> missed renewals in a row, each one reminded, the subscription is paused and the customer is told by email. Deliveries they were never reminded about (say the scheduler was off) don't count. Resuming starts the count again.</p>
+<h3 id="renewals-term">Fixed terms</h3>
+<p>A subscription with a set number of deliveries ends as <em>Completed</em> when the last one is ordered.</p>
+
+<h2 id="admin">Customers &gt; Subscriptions</h2>
+<ul>
+<li><strong>The list</strong>: counts by status (Active, Paused, Payment Due, Canceled, Completed) that work as filters, and a search for a subscription number, an order number, or part of a customer's name or email address. 50 to a page.</li>
+<li><strong>A subscription</strong>: the customer, items and last prices, dates, first and last orders, payment mode, whether the reminder for the next delivery has gone out, missed renewals so far, the consent record (when, from which IP address, and the exact terms), and the full history with who did what.</li>
+<li><strong>Actions</strong>: Skip Next Delivery, Pause, Resume, Change Date (moves the next delivery, and the schedule counts from it) and Cancel Subscription. Pause and Cancel can send the customer the same confirmation they'd get doing it themselves. Your changes follow the same rules as the customer's and show in the history with your admin name.</li>
+<li><strong>The scheduler</strong>: when it last ran, the cron command, and Run Renewals Now.</li>
+</ul>
+
+<h2 id="emails">The emails</h2>
+<table>
+<thead><tr><th scope="col">E-Mail</th><th scope="col">Sent</th></tr></thead>
+<tbody>
+<tr><td>Signup Confirmation</td><td>After the order confirmation, when an order starts a subscription.</td></tr>
+<tr><td>Renewal Reminder</td><td>By the scheduler, ahead of each delivery, with the Renew Now link.</td></tr>
+<tr><td>Subscription Paused</td><td>When the customer pauses a subscription, or you do with the box ticked.</td></tr>
+<tr><td>Subscription Canceled</td><td>When the customer cancels one, or you do with the box ticked.</td></tr>
+<tr><td>Paused After Missed Renewals</td><td>By the scheduler, after three missed renewals in a row.</td></tr>
+</tbody>
+</table>
+<p>All of them go through Zen Cart's normal mail, with your store's email template and settings. The renewal order's receipt is your normal order confirmation.</p>
+<p>With the free <strong>Preview Email</strong> plugin (Tools &gt; Preview Email), every one of these is listed under <strong>Subscriptions</strong>. Each preview is built by the same code that sends the real email, so what you see is what customers get, and you can send yourself a test copy.</p>
+
+<h2 id="laws">Auto-renewal laws</h2>
+<p>Several US states (California's law is the strictest) require four things of automatically renewing offers: clear terms before purchase, affirmative consent, a confirmation that repeats the terms, and a way to cancel online. The plugin gives you all four: the terms and a required checkbox at checkout, the signup email with the agreed terms, and Cancel Subscription on My Subscriptions. It saves the time, IP address and exact text of each customer's consent.</p>
+<p>What your terms say is up to you and your advisor; this isn't legal advice. Say how often it renews, that the customer places each renewal order from the emailed link, and how to cancel.</p>
+
+<h2 id="payment">Payment modules and Subscriptions Pro</h2>
+<p>Because each renewal is a normal checkout, this plugin works with every payment module, including off-site ones such as PayPal. It never sees or stores card details.</p>
+<p><strong>Subscriptions Pro</strong>, a paid add-on in development, will add automatic renewal through Authorize.Net: the card from the first order saved at Authorize.Net, and each renewal order created and charged on the due date, with retries and a pay-link fallback when a charge fails. Until then, every renewal is a pay-link renewal.</p>
+
+<h2 id="customizing">Customizing</h2>
+<ul>
+<li><strong>My Subscriptions page</strong>: copy <code>zc_plugins/Subscriptions/v1.0.0/catalog/includes/templates/default/templates/tpl_account_subscriptions_default.php</code> to <code>includes/templates/YOUR_TEMPLATE/templates/</code> and edit the copy. Your copy wins.</li>
+<li><strong>Wording</strong>: every customer-facing word is in the plugin's <code>catalog/includes/languages/english/extra_definitions/lang.subscriptions.php</code>, and the admin's in <code>admin/includes/languages/english/extra_definitions/lang.subscriptions.php</code>.</li>
+<li><strong>The option name</strong>: rename <em>Delivery</em> in the Option Name Manager if you'd rather call it something else.</li>
+<li><strong>The account link</strong>: it's added after the newsletters link on My Account. A template that already links to <code>main_page=account_subscriptions</code> is left alone.</li>
+</ul>
+<p>More detail, including the notifiers other plugins can use, is in <code>docs/CUSTOMIZING.md</code> in the download.</p>
+
+<h2 id="translating">Translating</h2>
+<p>Copy the two <code>english</code> folders inside the plugin (<code>catalog/includes/languages/english</code> and <code>admin/includes/languages/english</code>) to a folder named for your language, for example <code>spanish</code>, and translate the values, not the names. The interval labels (<em>Every %u Weeks</em> and so on) are in both files. The Delivery option's values take their names from those labels when the plugin creates them.</p>
+
+<h2 id="zc30">Zen Cart 3.0 notes</h2>
+<ul>
+<li>Zen Cart 3.0's cart currently fails on attribute price factors, which is how the plugin applies the discount on 1.5.8 through 2.3. On 3.0 the plugin applies the same discount another way, automatically.</li>
+<li>3.0's Plugin Manager can <strong>disable</strong> a plugin without uninstalling it. Disabling Subscriptions takes the Delivery choice off product pages; enabling puts it back. Earlier releases have no disable, so use <strong>Offer Subscriptions on Product Pages?</strong> or Uninstall.</li>
+</ul>
+
+<h2 id="upgrading">Upgrading</h2>
+<p>Upload the new version folder beside the old one, then click <strong>Upgrade</strong> in Plugin Manager. Your settings and subscriptions are kept, and the settings' wording is refreshed. When the upgrade is done you can delete the old version folder.</p>
+
+<h2 id="uninstalling">Uninstalling</h2>
+<ul>
+<li>Uninstalling always takes the Delivery choice off every product page, so nobody can choose a discounted subscription that would never renew.</li>
+<li>With <strong>Delete Subscription Data on Uninstall?</strong> at false (the default), the subscriptions, product settings, the Delivery option and the scheduler key are kept. Install again and everything carries on, and your cron job keeps working.</li>
+<li>Set it to true first to remove the tables, the option and every setting.</li>
+<li>Remove the cron job if you're not reinstalling.</li>
+</ul>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="ts-no-choice">The Delivery choice doesn't show on a product</h3>
+<p>Check that <strong>Offer Subscriptions on Product Pages?</strong> is true, that the product's Subscription is Optional or Required, and that at least one interval is ticked. After changing the store-wide setting, open any admin page once; the product pages are updated then.</p>
+<h3 id="ts-no-reminders">No reminders are going out</h3>
+<p>Look at <strong>Customers &gt; Subscriptions</strong>. If the scheduler has never run or hasn't run lately, check the cron job and try <strong>Run Renewals Now</strong>. If it ran but sent nothing, no delivery is inside the reminder window yet: each subscription's page says when its reminder is due.</p>
+<h3 id="ts-forbidden">The scheduler says Forbidden</h3>
+<p>The key in the address doesn't match <strong>Scheduler Key</strong>. Copy the command again from Customers &gt; Subscriptions.</p>
+<h3 id="ts-link-expired">A customer says the Renew Now link has expired</h3>
+<p>The delivery was already renewed, skipped or missed, or a newer reminder has gone out. If the next delivery is ready to order, My Subscriptions has a Renew Now button for it.</p>
+<h3 id="ts-guest">A customer can't check out as a guest</h3>
+<p>That's on purpose while the cart holds a subscription: they need an account to manage it. A one-time purchase still allows guest checkout.</p>
+
+<h2 id="support">Support and license</h2>
+<p>Support is through the Zen Cart forum and My Zen Cart Host. The source, releases and issue tracker are on GitHub at <a href="https://github.com/dbltoe/Subscriptions">github.com/dbltoe/Subscriptions</a>. Subscriptions is free software under the GNU General Public License v2.0; see <code>LICENSE</code> in the download.</p>
+
+</body>
+</html>

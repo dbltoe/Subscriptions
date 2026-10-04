@@ -1,0 +1,28 @@
+# Line endings and file types.
+#
+# .editorconfig already asks editors for LF; this asks git for the same, so a
+# checkout on Windows cannot quietly turn a plugin file into CRLF and hand a
+# Zen Cart store a file that differs byte-for-byte from the one that was tested.
+* text=auto eol=lf
+
+# THE PDF MUST BE BINARY.
+#
+# Not a precaution -- git gets this one wrong here. Its heuristic calls a file
+# text when the first 8000 bytes hold no NUL byte, and the printable sign-up
+# sheet is hand-built with an UNCOMPRESSED content stream, so it is almost
+# entirely ASCII and contains no NUL at all. Left to that heuristic git offers
+# to "fix" its line endings, which rewrites bytes inside the file and shifts
+# every offset in its cross-reference table. The result is a PDF that viewers
+# refuse to open, produced by nothing more than cloning the repository on a
+# different platform.
+*.pdf binary
+*.png binary
+*.jpg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.zip binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary

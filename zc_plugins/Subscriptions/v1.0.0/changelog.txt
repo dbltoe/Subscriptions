@@ -1,0 +1,26 @@
+Subscriptions -- changelog
+==========================
+
+v1.0.0
+------
+The first release.
+
+- Product setup: a Subscription panel on the product edit page (off,
+  optional or required), the intervals offered, a subscribe-and-save
+  discount and an optional number of deliveries.
+- The storefront choice is a product option the plugin manages
+  ("Delivery"), so it works in every template without edits.
+- Checkout: a required consent checkbox with your subscription terms,
+  saved with each subscription; subscriptions need a customer account;
+  a signup email with the terms.
+- My Subscriptions in My Account: Renew Now, skip, pause, resume,
+  change interval or quantities, cancel.
+- Renewals by pay link: an hourly scheduler emails a Renew Now link
+  before each renewal; it fills the cart and the customer checks out as
+  usual. Nothing is charged automatically. Three missed renewals in a
+  row pause the subscription.
+- Customers > Subscriptions in the admin: search, filters, history,
+  consent record and admin actions, plus the scheduler's status.
+- Preview Email definitions for all five emails.
+- Runs on Zen Cart v1.5.8 through v3.0.0 and PHP 7.4 through 8.5 from a
+  single codebase.
