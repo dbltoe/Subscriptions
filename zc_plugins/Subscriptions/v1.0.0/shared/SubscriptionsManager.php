@@ -334,7 +334,7 @@ class SubscriptionsManager
             'email' => $email,
             'subject' => sprintf($cancel ? SUBSCRIPTIONS_EMAIL_CANCELED_SUBJECT : SUBSCRIPTIONS_EMAIL_PAUSED_SUBJECT, $subId),
             'text' => $text,
-            'html' => '<p>' . nl2br(htmlspecialchars($text, ENT_QUOTES, defined('CHARSET') ? CHARSET : 'UTF-8')) . '</p>',
+            'html' => SubscriptionsCore::textToHtml($text),
         ];
     }
 

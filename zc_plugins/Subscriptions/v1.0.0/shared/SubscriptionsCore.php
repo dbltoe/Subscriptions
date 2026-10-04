@@ -280,6 +280,19 @@ class SubscriptionsCore
         }
     }
 
+    /**
+     * An email's HTML part from its text: escaped, line breaks kept, and every
+     * web address a real link. A bare address in HTML is left for the mail
+     * client to link, and clients that do pull the "<br />" after it and the
+     * "&amp;" inside it into the link (garbled links, seen 2026-10-04).
+     */
+    public static function textToHtml(string $text): string
+    {
+        $html = htmlspecialchars($text, ENT_QUOTES, defined('CHARSET') ? CHARSET : 'UTF-8');
+        $html = preg_replace('~https?://[^\s<]+~', '<a href="$0">$0</a>', $html);
+        return '<p>' . nl2br($html) . '</p>';
+    }
+
     private static function text(string $constant, string $default): string
     {
         return defined($constant) ? (string)constant($constant) : $default;

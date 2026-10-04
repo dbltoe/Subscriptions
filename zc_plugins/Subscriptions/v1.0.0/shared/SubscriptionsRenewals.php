@@ -474,7 +474,7 @@ class SubscriptionsRenewals
             'email' => $email,
             'subject' => sprintf(self::text('SUBSCRIPTIONS_LAPSED_SUBJECT', 'We\'ve paused your subscription #%u'), $subId),
             'text' => $text,
-            'html' => '<p>' . nl2br(htmlspecialchars($text, ENT_QUOTES, defined('CHARSET') ? CHARSET : 'UTF-8')) . '</p>',
+            'html' => SubscriptionsCore::textToHtml($text),
         ];
     }
 
