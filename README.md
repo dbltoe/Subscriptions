@@ -1,6 +1,6 @@
 # Subscriptions for Zen Cart
 
-Sell products as subscriptions. On the product page the customer chooses a one-time purchase or a delivery interval, with an optional subscribe-and-save discount. Before each renewal they're emailed a Renew Now link that fills their cart, and they check out as usual, so it works with every payment module. Customers manage their subscriptions from My Account, and you manage them under Customers > Subscriptions.
+Sell anything your customers buy again and again as a subscription, on the schedule that fits it: coffee every two weeks, that great jerky every two months, balsamic vinegar every quarter, oil filters every six months. On the product page the customer chooses a one-time purchase or one of the intervals you offer, with an optional subscribe-and-save discount. Before each renewal they're emailed a Renew Now link that fills their cart, and they check out as usual, so it works with every payment module. Customers manage their subscriptions from My Account, and you manage them under Customers > Subscriptions.
 
 Runs on Zen Cart 1.5.8 through 3.0.0 and PHP 7.4 through 8.5 from one codebase, as an encapsulated plugin: no core or template files are changed.
 
