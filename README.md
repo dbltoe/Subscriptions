@@ -10,7 +10,7 @@ Runs on Zen Cart 1.5.8 through 3.0.0 and PHP 7.4 through 8.5 from one codebase, 
 - The Delivery choice on the product page, as a product option the plugin manages, so every template shows it without edits.
 - Checkout: required consent to your terms (saved with each subscription), an account required for subscriptions, a signup email.
 - My Subscriptions: Renew Now, skip, pause, resume, change interval or quantities, cancel.
-- Pay-link renewals driven by an hourly scheduler: reminders, missed renewals moved on, pause after three missed in a row.
+- Pay-link renewals driven by a scheduler (a cron job every 6 hours): reminders, missed renewals moved on, pause after three missed in a row.
 - Customers > Subscriptions: search, filters, the full history and consent record, and admin actions.
 - Preview Email definitions for all five emails.
 

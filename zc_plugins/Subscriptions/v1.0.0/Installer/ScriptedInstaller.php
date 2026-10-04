@@ -378,7 +378,7 @@ class ScriptedInstaller extends ScriptedInstallBase
                 'key' => 'SUBSCRIPTIONS_CRON_KEY',
                 'title' => 'Scheduler Key',
                 'value' => '',
-                'description' => 'The secret in the scheduler address. Generated at install.<br><br>The scheduler sends the renewal reminders. Run it once an hour with a cron job (in cPanel: Cron Jobs, Once Per Hour) using this command:<br><code>curl -fsSL "' . $schedulerUrl . '" &gt;/dev/null</code><br><br>Or have an outside cron service open this address once an hour:<br><code>' . $schedulerUrl . '</code>',
+                'description' => 'The secret in the scheduler address. Generated at install.<br><br>The scheduler sends the renewal reminders. Run it every 6 hours with a cron job using this command. In cPanel (Cron Jobs), enter Minute 17, Hour */6, and * for Day, Month and Weekday.<br><br><code>curl -fsSL "' . $schedulerUrl . '" &gt;/dev/null</code><br><br>Or have an outside cron service open this address every 6 hours:<br><code>' . $schedulerUrl . '</code>',
                 'sort_order' => 920,
                 'set_function' => $readOnly,
             ],

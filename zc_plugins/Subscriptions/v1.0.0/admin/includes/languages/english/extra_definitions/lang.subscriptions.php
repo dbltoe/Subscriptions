@@ -71,8 +71,8 @@ $define = [
     'SUBSCRIPTIONS_ADMIN_BUTTON_RUN' => 'Run Renewals Now',
     'SUBSCRIPTIONS_ADMIN_RUN_HELP' => 'Opens the scheduler in a new tab and shows what it did. It is safe to run any time: each reminder is sent once.',
     'SUBSCRIPTIONS_ADMIN_SETUP' => 'Scheduler Setup',
-    'SUBSCRIPTIONS_ADMIN_SETUP_CRON' => 'Run the scheduler once an hour with a cron job (in cPanel: Cron Jobs, Once Per Hour) using this command:',
-    'SUBSCRIPTIONS_ADMIN_SETUP_URL' => 'Or have an outside cron service open this address once an hour:',
+    'SUBSCRIPTIONS_ADMIN_SETUP_CRON' => 'Run the scheduler every 6 hours with a cron job using this command. In cPanel (Cron Jobs), enter Minute 17, Hour */6, and * for Day, Month and Weekday.',
+    'SUBSCRIPTIONS_ADMIN_SETUP_URL' => 'Or have an outside cron service open this address every 6 hours:',
 
     'SUBSCRIPTIONS_ADMIN_LBL_CUSTOMER' => 'Customer',
     'SUBSCRIPTIONS_ADMIN_LBL_STATUS' => 'Status',

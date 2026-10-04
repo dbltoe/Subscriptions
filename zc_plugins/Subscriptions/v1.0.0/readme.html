@@ -71,7 +71,7 @@ nav ol{columns:2;column-gap:2em;padding-left:1.4em}
 <ul>
 <li>Zen Cart 1.5.8a, 2.0.x, 2.1.0, 2.2.x, 2.3.x or 3.0.0.</li>
 <li>PHP 7.4 through 8.5.</li>
-<li>A way to open a web address once an hour: a cron job (every cPanel host has one) or an outside cron service. See <a href="#scheduler">Setting up the scheduler</a>.</li>
+<li>A way to open a web address every 6 hours: a cron job (every cPanel host has one) or an outside cron service. See <a href="#scheduler">Setting up the scheduler</a>.</li>
 <li>Customers need an account to subscribe. Guest checkout still works for everything else.</li>
 </ul>
 
@@ -79,27 +79,27 @@ nav ol{columns:2;column-gap:2em;padding-left:1.4em}
 <ol>
 <li>Upload the <code>zc_plugins/Subscriptions</code> folder from this package into your store's <code>zc_plugins</code> folder, so you have <code>zc_plugins/Subscriptions/v1.0.0/manifest.php</code>.</li>
 <li>In the admin, go to <strong>Modules &gt; Plugin Manager</strong>, select <strong>Subscriptions</strong> and click <strong>Install</strong>.</li>
-<li>Set up the hourly scheduler (<a href="#scheduler">next section</a>).</li>
+<li>Set up the scheduler (<a href="#scheduler">next section</a>).</li>
 <li>Check the settings under <strong>Configuration &gt; Subscriptions</strong>, especially <strong>Subscription Terms</strong>.</li>
 <li>Turn subscriptions on for a product (<a href="#products">Setting up a product</a>).</li>
 </ol>
 <p>The installer creates five tables (<code>subscriptions</code>, <code>subscriptions_products</code>, <code>subscriptions_history</code>, <code>subscriptions_intervals</code> and <code>products_subscription</code>, each with your table prefix), a product option named <strong>Delivery</strong>, the settings, and the admin page. If a table of the same name already exists and belongs to something else, it stops before writing anything and tells you.</p>
 
 <h2 id="scheduler">Setting up the scheduler</h2>
-<p>Zen Cart has no scheduler of its own, so the plugin answers on a secret address that something has to open once an hour. Each run sends the renewal reminders that are due and moves on any renewals that weren't placed in time.</p>
+<p>Zen Cart has no scheduler of its own, so the plugin answers on a secret address that something has to open every few hours; every 6 hours is plenty, and once a day still works, because all its timing is by date. Each run sends the renewal reminders that are due and moves on any renewals that weren't placed in time.</p>
 <p>The address and a ready-made cron command are on <strong>Customers &gt; Subscriptions</strong> (open <strong>Scheduler Setup</strong>) and in the description of <strong>Configuration &gt; Subscriptions &gt; Scheduler Key</strong>. The command looks like this:</p>
 <pre>curl -fsSL "https://www.example.com/index.php?main_page=subscriptions_cron&amp;key=YOUR-KEY" &gt;/dev/null</pre>
 <h3 id="scheduler-cpanel">With cPanel</h3>
 <ol>
 <li>Open <strong>Cron Jobs</strong>.</li>
-<li>Under <strong>Common Settings</strong> choose <strong>Once Per Hour</strong>.</li>
+<li>Under <strong>Add New Cron Job</strong>, enter <strong>Minute</strong> 17, <strong>Hour</strong> <code>*/6</code>, and <code>*</code> for Day, Month and Weekday (every 6 hours, at 17 past, which avoids the top-of-the-hour rush on shared servers).</li>
 <li>Paste the command from your admin into <strong>Command</strong> and click <strong>Add New Cron Job</strong>.</li>
 </ol>
 <h3 id="scheduler-outside">Without cron</h3>
-<p>Any outside cron service that can open a web address on a schedule will do. Give it the address (without <code>curl</code>) and set it to hourly.</p>
+<p>Any outside cron service that can open a web address on a schedule will do. Give it the address (without <code>curl</code>) and set it to every 6 hours.</p>
 <h3 id="scheduler-check">Checking it</h3>
 <ul>
-<li><strong>Customers &gt; Subscriptions</strong> shows when the scheduler last ran, in red when it hasn't run for three hours.</li>
+<li><strong>Customers &gt; Subscriptions</strong> shows when the scheduler last ran, in red when it hasn't run for 25 hours.</li>
 <li><strong>Run Renewals Now</strong> on the same page runs it in a new tab and shows what it did. It's safe any time: each reminder is sent once.</li>
 <li>A wrong or missing key gets a bare <em>Forbidden</em>. Keep the key to yourself.</li>
 </ul>

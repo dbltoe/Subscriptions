@@ -184,7 +184,7 @@ class SubscriptionsAdmin
             return ['', null, false];
         }
         $hours = max(0, intdiv($now - $t, 3600));
-        // Hourly is expected; a couple of missed hours is a host hiccup, three is a stopped cron.
-        return [$lastRun, $hours, $hours < 3];
+        // Every 6 hours is the recommended cron, daily the least that works: past 25 hours it has stopped.
+        return [$lastRun, $hours, $hours < 25];
     }
 }

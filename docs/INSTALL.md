@@ -4,7 +4,7 @@
 
 - Zen Cart 1.5.8a, 2.0.x, 2.1.0, 2.2.x, 2.3.x or 3.0.0.
 - PHP 7.4 through 8.5.
-- Something that opens a web address once an hour: a cron job, or an outside cron service.
+- Something that opens a web address every few hours (every 6 is plenty; daily still works): a cron job, or an outside cron service.
 
 ## Install
 
@@ -26,15 +26,15 @@ https://www.example.com/index.php?main_page=subscriptions_cron&key=YOUR-KEY
 
 Your store's exact address and a ready-made command are on **Customers > Subscriptions** (Scheduler Setup) and in the description of **Configuration > Subscriptions > Scheduler Key**.
 
-**cPanel:** Cron Jobs > Common Settings > Once Per Hour, then paste:
+**cPanel:** Cron Jobs > Add New Cron Job: Minute `17`, Hour `*/6`, and `*` for Day, Month and Weekday, then paste:
 
 ```
 curl -fsSL "https://www.example.com/index.php?main_page=subscriptions_cron&key=YOUR-KEY" >/dev/null
 ```
 
-**No cron:** have an outside cron service open the address hourly.
+**No cron:** have an outside cron service open the address every 6 hours.
 
-Customers > Subscriptions shows when the scheduler last ran and warns in red once it hasn't run for three hours. **Run Renewals Now** runs it on demand in a new tab. A wrong key gets a bare 403 Forbidden.
+Customers > Subscriptions shows when the scheduler last ran and warns in red once it hasn't run for 25 hours. **Run Renewals Now** runs it on demand in a new tab. A wrong key gets a bare 403 Forbidden.
 
 The scheduler is a normal storefront request, so Down for Maintenance, or a setting that makes customers log in before browsing, stops it too.
 

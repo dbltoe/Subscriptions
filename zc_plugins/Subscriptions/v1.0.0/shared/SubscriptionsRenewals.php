@@ -18,7 +18,7 @@
  *
  * The scheduler takes a database lock, so two runs never overlap, and every
  * step is idempotent (a reminder is sent once per due date), so running it
- * more often than hourly does no harm.
+ * more often than needed does no harm (every 6 hours is plenty; all timing is by date).
  *
  * @package  Subscriptions
  * @license  http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0

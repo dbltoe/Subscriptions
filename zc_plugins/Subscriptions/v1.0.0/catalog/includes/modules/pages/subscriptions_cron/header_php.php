@@ -4,7 +4,7 @@
  *
  *   index.php?main_page=subscriptions_cron&key=<Scheduler Key>
  *
- * Opened once an hour by a cron job (curl) or an outside cron service. It runs
+ * Opened every 6 hours by a cron job (curl) or an outside cron service. It runs
  * inside a normal storefront request, so the emails get the store's templates,
  * currencies and links exactly as a customer's page would. Answers in plain
  * text and never renders a template; a wrong or missing key gets a bare 403.

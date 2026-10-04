@@ -15,10 +15,10 @@ The first release.
   a signup email with the terms.
 - My Subscriptions in My Account: Renew Now, skip, pause, resume,
   change interval or quantities, cancel.
-- Renewals by pay link: an hourly scheduler emails a Renew Now link
-  before each renewal; it fills the cart and the customer checks out as
-  usual. Nothing is charged automatically. Three missed renewals in a
-  row pause the subscription.
+- Renewals by pay link: a scheduler (a cron job every 6 hours) emails a
+  Renew Now link before each renewal; it fills the cart and the customer
+  checks out as usual. Nothing is charged automatically. Three missed
+  renewals in a row pause the subscription.
 - Customers > Subscriptions in the admin: search, filters, history,
   consent record and admin actions, plus the scheduler's status.
 - Preview Email definitions for all five emails.
