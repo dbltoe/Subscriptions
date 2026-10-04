@@ -18,7 +18,7 @@
 $subsPluginDir = 'zc_plugins/Subscriptions/v1.0.0/';
 $subsReadmeUrl = (defined('DIR_WS_CATALOG') ? DIR_WS_CATALOG : '/') . $subsPluginDir . 'readme.html';
 $subsGithubUrl = 'https://github.com/dbltoe/Subscriptions';
-$subsForumUrl = '';
+$subsForumUrl = 'https://www.zen-cart.com/threads/207379';
 
 $subsGap = '6px';
 $subsButton = static function ($url, $label) use ($subsGap) {
