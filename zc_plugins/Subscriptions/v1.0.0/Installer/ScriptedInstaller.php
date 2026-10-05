@@ -21,8 +21,16 @@
 
 use Zencart\PluginSupport\ScriptedInstaller as ScriptedInstallBase;
 
-require_once dirname(__DIR__) . '/shared/SubscriptionsAttributes.php';
-require_once dirname(__DIR__) . '/shared/SubscriptionsRenewals.php';
+// Plugin Manager's Upgrade runs this file in an admin request that already holds the
+// installed version's classes, loaded from that version's folder; requiring this
+// version's copy as well would fatal on the redeclared class. So every require of a
+// plugin class, here and throughout the plugin, happens only when the class is missing.
+if (!class_exists('SubscriptionsAttributes', false)) {
+    require_once dirname(__DIR__) . '/shared/SubscriptionsAttributes.php';
+}
+if (!class_exists('SubscriptionsRenewals', false)) {
+    require_once dirname(__DIR__) . '/shared/SubscriptionsRenewals.php';
+}
 
 class ScriptedInstaller extends ScriptedInstallBase
 {

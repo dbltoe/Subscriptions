@@ -7,7 +7,9 @@
  * harnesses can exercise all of it without a store.
  *
  * Loaded with require_once via __DIR__ from every entry point (installer, admin
- * observer, storefront observer). No Zen Cart loader is relied on: the catalog
+ * observer, storefront observer), and only when the class isn't loaded yet: Plugin
+ * Manager's Upgrade runs the new version's installer in a request that already holds
+ * the installed version's classes, loaded from that version's folder. No Zen Cart loader is relied on: the catalog
  * side never auto-loads a plugin's extra_functions, and the admin side stopped
  * doing so on master in 2026.
  *

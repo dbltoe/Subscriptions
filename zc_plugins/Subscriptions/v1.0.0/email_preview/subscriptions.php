@@ -18,9 +18,15 @@ if (!defined('IS_ADMIN_FLAG')) {
     die('Illegal Access');
 }
 
-require_once dirname(__DIR__) . '/shared/SubscriptionsCheckout.php';
-require_once dirname(__DIR__) . '/shared/SubscriptionsManager.php';
-require_once dirname(__DIR__) . '/shared/SubscriptionsRenewals.php';
+if (!class_exists('SubscriptionsCheckout', false)) {
+    require_once dirname(__DIR__) . '/shared/SubscriptionsCheckout.php';
+}
+if (!class_exists('SubscriptionsManager', false)) {
+    require_once dirname(__DIR__) . '/shared/SubscriptionsManager.php';
+}
+if (!class_exists('SubscriptionsRenewals', false)) {
+    require_once dirname(__DIR__) . '/shared/SubscriptionsRenewals.php';
+}
 
 if (!function_exists('subscriptions_preview_setup')) {
     /**

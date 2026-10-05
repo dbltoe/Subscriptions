@@ -26,9 +26,15 @@ if (!defined('IS_ADMIN_FLAG')) {
 }
 
 require 'includes/application_top.php';
-require_once __DIR__ . '/../shared/SubscriptionsAdmin.php';
-require_once __DIR__ . '/../shared/SubscriptionsManager.php';
-require_once __DIR__ . '/../shared/SubscriptionsRenewals.php';
+if (!class_exists('SubscriptionsAdmin', false)) {
+    require_once __DIR__ . '/../shared/SubscriptionsAdmin.php';
+}
+if (!class_exists('SubscriptionsManager', false)) {
+    require_once __DIR__ . '/../shared/SubscriptionsManager.php';
+}
+if (!class_exists('SubscriptionsRenewals', false)) {
+    require_once __DIR__ . '/../shared/SubscriptionsRenewals.php';
+}
 
 // The admin doesn't make $currencies for every page; pages that show money do,
 // as orders.php does. 3.0 autoloads the class; earlier releases need the file.

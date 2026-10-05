@@ -17,7 +17,9 @@ if (!defined('IS_ADMIN_FLAG')) {
     die('Illegal Access');
 }
 
-require_once dirname(__DIR__, 5) . '/shared/SubscriptionsRenewals.php';
+if (!class_exists('SubscriptionsRenewals', false)) {
+    require_once dirname(__DIR__, 5) . '/shared/SubscriptionsRenewals.php';
+}
 
 header('Content-Type: text/plain; charset=' . CHARSET);
 header('Cache-Control: no-store');

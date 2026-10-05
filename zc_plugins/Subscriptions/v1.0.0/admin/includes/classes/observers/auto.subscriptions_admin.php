@@ -27,7 +27,9 @@ if (!defined('IS_ADMIN_FLAG')) {
     die('Illegal Access');
 }
 
-require_once dirname(__DIR__, 4) . '/shared/SubscriptionsAttributes.php';
+if (!class_exists('SubscriptionsAttributes', false)) {
+    require_once dirname(__DIR__, 4) . '/shared/SubscriptionsAttributes.php';
+}
 
 class zcObserverSubscriptionsAdmin extends base
 {

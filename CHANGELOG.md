@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Fixed
+
+- Upgrading from an earlier version in Plugin Manager no longer stops with "Cannot redeclare class". The Upgrade runs the new version's installer in an admin request that already holds the installed version's classes, loaded from that version's folder, so every require of a plugin class now happens only when the class isn't loaded yet. This takes effect for upgrades to the next release; v1.0.0 has nothing earlier to upgrade from.
+
 ## [1.0.0] - 2026-10-03
 
 The first release: subscriptions with pay-link renewals, for Zen Cart 1.5.8 through 3.0.0 on PHP 7.4 through 8.5.

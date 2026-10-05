@@ -13,5 +13,7 @@ if (!defined('IS_ADMIN_FLAG')) {
     die('Illegal Access');
 }
 
-require_once dirname(__DIR__, 3) . '/shared/SubscriptionsCore.php';
+if (!class_exists('SubscriptionsCore', false)) {
+    require_once dirname(__DIR__, 3) . '/shared/SubscriptionsCore.php';
+}
 SubscriptionsCore::defineTables();

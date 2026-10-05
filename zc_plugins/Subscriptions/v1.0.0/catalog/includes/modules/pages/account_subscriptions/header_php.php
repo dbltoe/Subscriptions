@@ -23,8 +23,12 @@ if (!zen_is_logged_in() || zen_in_guest_checkout()) {
 }
 
 require DIR_WS_MODULES . zen_get_module_directory('require_languages.php');
-require_once dirname(__DIR__, 5) . '/shared/SubscriptionsManager.php';
-require_once dirname(__DIR__, 5) . '/shared/SubscriptionsRenewals.php';
+if (!class_exists('SubscriptionsManager', false)) {
+    require_once dirname(__DIR__, 5) . '/shared/SubscriptionsManager.php';
+}
+if (!class_exists('SubscriptionsRenewals', false)) {
+    require_once dirname(__DIR__, 5) . '/shared/SubscriptionsRenewals.php';
+}
 
 // This page's own titles; defined here so they exist only on this page.
 if (!defined('NAVBAR_TITLE_1')) {

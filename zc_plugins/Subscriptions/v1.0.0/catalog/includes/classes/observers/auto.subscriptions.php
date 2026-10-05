@@ -32,8 +32,12 @@ if (!defined('IS_ADMIN_FLAG')) {
     die('Illegal Access');
 }
 
-require_once dirname(__DIR__, 4) . '/shared/SubscriptionsCheckout.php';
-require_once dirname(__DIR__, 4) . '/shared/SubscriptionsRenewals.php';
+if (!class_exists('SubscriptionsCheckout', false)) {
+    require_once dirname(__DIR__, 4) . '/shared/SubscriptionsCheckout.php';
+}
+if (!class_exists('SubscriptionsRenewals', false)) {
+    require_once dirname(__DIR__, 4) . '/shared/SubscriptionsRenewals.php';
+}
 
 class zcObserverSubscriptions extends base
 {

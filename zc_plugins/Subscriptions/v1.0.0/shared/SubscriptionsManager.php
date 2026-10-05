@@ -18,7 +18,9 @@ if (!defined('IS_ADMIN_FLAG')) {
     die('Illegal Access');
 }
 
-require_once __DIR__ . '/SubscriptionsCore.php';
+if (!class_exists('SubscriptionsCore', false)) {
+    require_once __DIR__ . '/SubscriptionsCore.php';
+}
 
 class SubscriptionsManager
 {
