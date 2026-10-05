@@ -28,10 +28,8 @@ $subsButton = static function ($url, $label) use ($subsGap) {
 $subsLinks = '<div style="margin:10px 0 0;padding:0 0 0 ' . $subsGap . '">'
     . $subsButton($subsReadmeUrl, 'Read Me')
     . ($subsGithubUrl !== '' ? $subsButton($subsGithubUrl, 'GitHub') : '')
-    . '</div>'
-    . ($subsForumUrl !== ''
-        ? '<div style="margin:8px 0 0;padding:0 0 0 ' . $subsGap . '"><a href="' . $subsForumUrl . '" target="_blank" rel="noopener noreferrer">Forum Support Thread</a></div>'
-        : '');
+    . ($subsForumUrl !== '' ? $subsButton($subsForumUrl, 'Forum Support Thread') : '')
+    . '</div>';
 
 return [
     'pluginVersion' => 'v1.0.1',
