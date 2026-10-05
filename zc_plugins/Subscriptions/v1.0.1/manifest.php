@@ -15,7 +15,7 @@
  * @license  http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  */
 
-$subsPluginDir = 'zc_plugins/Subscriptions/v1.0.0/';
+$subsPluginDir = 'zc_plugins/Subscriptions/v1.0.1/';
 $subsReadmeUrl = (defined('DIR_WS_CATALOG') ? DIR_WS_CATALOG : '/') . $subsPluginDir . 'readme.html';
 $subsGithubUrl = 'https://github.com/dbltoe/Subscriptions';
 $subsForumUrl = 'https://www.zen-cart.com/threads/207379';
@@ -34,7 +34,7 @@ $subsLinks = '<div style="margin:10px 0 0;padding:0 0 0 ' . $subsGap . '">'
         : '');
 
 return [
-    'pluginVersion' => 'v1.0.0',
+    'pluginVersion' => 'v1.0.1',
     'pluginName' => 'Subscriptions',
     'pluginDescription' =>
         'Sell products as subscriptions. Customers choose a one-time purchase or a delivery '

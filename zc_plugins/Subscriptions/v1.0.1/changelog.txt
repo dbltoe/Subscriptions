@@ -1,6 +1,16 @@
 Subscriptions -- changelog
 ==========================
 
+v1.0.1
+------
+- Fixed: Upgrade in Plugin Manager stopped with "Cannot redeclare
+  class". The admin request that runs the new version's installer
+  already holds the installed version's classes, loaded from that
+  version's folder, so every require of a plugin class now happens only
+  when the class isn't loaded yet. Upgrading from 1.0.0 to this version
+  works because of it.
+- Upgrade in Plugin Manager; no settings, data or email change.
+
 v1.0.0
 ------
 The first release.

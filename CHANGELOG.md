@@ -1,10 +1,12 @@
 # Changelog
 
-## [Unreleased]
+## [1.0.1] - 2026-10-04
 
 ### Fixed
 
-- Upgrading from an earlier version in Plugin Manager no longer stops with "Cannot redeclare class". The Upgrade runs the new version's installer in an admin request that already holds the installed version's classes, loaded from that version's folder, so every require of a plugin class now happens only when the class isn't loaded yet. This takes effect for upgrades to the next release; v1.0.0 has nothing earlier to upgrade from.
+- Upgrading from an earlier version in Plugin Manager no longer stops with "Cannot redeclare class". The Upgrade runs the new version's installer in an admin request that already holds the installed version's classes, loaded from that version's folder, so every require of a plugin class now happens only when the class isn't loaded yet. Upgrading from 1.0.0 to this version already works because of it. Nothing else changed: no settings, data or emails.
+
+Upgrade in Plugin Manager: upload the v1.0.1 folder beside v1.0.0, click Upgrade, then Upgrade again on the confirmation screen.
 
 ## [1.0.0] - 2026-10-03
 
@@ -30,4 +32,5 @@ The first release: subscriptions with pay-link renewals, for Zen Cart 1.5.8 thro
 - Admin actions: Skip Next Delivery, Pause / Resume, Change Date (the next delivery) and Cancel Subscription with an optional reason, each optionally confirmed to the customer by the same email they'd get doing it themselves. The admin's changes obey the same rules as the customer's and are recorded with the admin's name.
 - The admin page shows when the scheduler last ran (and warns when it has stopped), the cron command to set it up, and a Run Renewals Now button.
 
+[1.0.1]: https://github.com/dbltoe/Subscriptions/releases/tag/v1.0.1
 [1.0.0]: https://github.com/dbltoe/Subscriptions/releases/tag/v1.0.0

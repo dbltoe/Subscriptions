@@ -8,7 +8,7 @@
 
 ## Install
 
-1. Upload `zc_plugins/Subscriptions` from this package into your store's `zc_plugins` folder, so `zc_plugins/Subscriptions/v1.0.0/manifest.php` exists.
+1. Upload `zc_plugins/Subscriptions` from this package into your store's `zc_plugins` folder, so `zc_plugins/Subscriptions/v1.0.1/manifest.php` exists.
 2. In the admin, open **Modules > Plugin Manager**, select **Subscriptions**, and click **Install**.
 3. Set up the scheduler (below).
 4. Review **Configuration > Subscriptions**, above all **Subscription Terms**.

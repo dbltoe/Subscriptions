@@ -27,7 +27,7 @@ nav ol{columns:2;column-gap:2em;padding-left:1.4em}
 <body>
 
 <h1>Subscriptions for Zen Cart</h1>
-<p class="lead">Version 1.0.0 for Zen Cart 1.5.8 through 3.0.0 on PHP 7.4 through 8.5. Free software (GPL v2) by My Zen Cart Host (dbltoe).</p>
+<p class="lead">Version 1.0.1 for Zen Cart 1.5.8 through 3.0.0 on PHP 7.4 through 8.5. Free software (GPL v2) by My Zen Cart Host (dbltoe).</p>
 
 <nav aria-label="Contents">
 <h2 id="contents">Contents</h2>
@@ -77,7 +77,7 @@ nav ol{columns:2;column-gap:2em;padding-left:1.4em}
 
 <h2 id="installing">Installing</h2>
 <ol>
-<li>Upload the <code>zc_plugins/Subscriptions</code> folder from this package into your store's <code>zc_plugins</code> folder, so you have <code>zc_plugins/Subscriptions/v1.0.0/manifest.php</code>.</li>
+<li>Upload the <code>zc_plugins/Subscriptions</code> folder from this package into your store's <code>zc_plugins</code> folder, so you have <code>zc_plugins/Subscriptions/v1.0.1/manifest.php</code>.</li>
 <li>In the admin, go to <strong>Modules &gt; Plugin Manager</strong>, select <strong>Subscriptions</strong> and click <strong>Install</strong>.</li>
 <li>Set up the scheduler (<a href="#scheduler">next section</a>).</li>
 <li>Check the settings under <strong>Configuration &gt; Subscriptions</strong>, especially <strong>Subscription Terms</strong>.</li>
@@ -197,7 +197,7 @@ nav ol{columns:2;column-gap:2em;padding-left:1.4em}
 
 <h2 id="customizing">Customizing</h2>
 <ul>
-<li><strong>My Subscriptions page</strong>: copy <code>zc_plugins/Subscriptions/v1.0.0/catalog/includes/templates/default/templates/tpl_account_subscriptions_default.php</code> to <code>includes/templates/YOUR_TEMPLATE/templates/</code> and edit the copy. Your copy wins.</li>
+<li><strong>My Subscriptions page</strong>: copy <code>zc_plugins/Subscriptions/v1.0.1/catalog/includes/templates/default/templates/tpl_account_subscriptions_default.php</code> to <code>includes/templates/YOUR_TEMPLATE/templates/</code> and edit the copy. Your copy wins.</li>
 <li><strong>Wording</strong>: every customer-facing word is in the plugin's <code>catalog/includes/languages/english/extra_definitions/lang.subscriptions.php</code>, and the admin's in <code>admin/includes/languages/english/extra_definitions/lang.subscriptions.php</code>.</li>
 <li><strong>The option name</strong>: rename <em>Delivery</em> in the Option Name Manager if you'd rather call it something else.</li>
 <li><strong>The account link</strong>: it's added after the newsletters link on My Account. A template that already links to <code>main_page=account_subscriptions</code> is left alone.</li>

@@ -27,7 +27,7 @@ Automatic charging of a saved card is planned for a paid add-on, Subscriptions P
 
 ## Layout
 
-- `zc_plugins/Subscriptions/v1.0.0/`: the plugin, exactly as it's uploaded.
+- `zc_plugins/Subscriptions/v1.0.1/`: the plugin, exactly as it's uploaded.
   - `shared/`: the classes every side uses, loaded with `require_once` via `__DIR__`.
   - `Installer/`: Plugin Manager install, upgrade and uninstall, plus the Zen Cart 3.0 disable hook.
   - `admin/`: Customers > Subscriptions, the product panel observer, admin text.

@@ -25,7 +25,7 @@ if (!defined('IS_ADMIN_FLAG')) {
 
 class SubscriptionsCore
 {
-    public const VERSION = 'v1.0.0';
+    public const VERSION = 'v1.0.1';
 
     /** Units a subscription can repeat in, with the most each may count up to. */
     public const UNITS = ['day' => 365, 'week' => 52, 'month' => 12];
