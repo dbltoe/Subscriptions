@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.2] - 2026-10-06
+
+### Changed
+
+- The Plugin ID is now 2463, the ID the Zen Cart Plugins Library assigned on 6 October 2026, so Plugin Manager's update check asks about this plugin. No code, settings, data or email changes; upgrading is optional and only matters for update notices.
+
+Upgrade in Plugin Manager: upload the v1.0.2 folder beside v1.0.1, click Upgrade, then Upgrade again on the confirmation screen. On Zen Cart 2.2 and later Plugin Manager picks up the new ID by itself. On 1.5.8 through 2.1.x it records the ID only when it first sees the plugin; to set it there, run `UPDATE plugin_control SET zc_contrib_id = 2463 WHERE unique_key = 'Subscriptions';` in Admin > Tools > Install SQL Patches, which adds your table prefix itself (in phpMyAdmin, add the prefix to `plugin_control`). It isn't required.
+
 ## [1.0.1] - 2026-10-04
 
 ### Fixed
@@ -32,5 +40,6 @@ The first release: subscriptions with pay-link renewals, for Zen Cart 1.5.8 thro
 - Admin actions: Skip Next Delivery, Pause / Resume, Change Date (the next delivery) and Cancel Subscription with an optional reason, each optionally confirmed to the customer by the same email they'd get doing it themselves. The admin's changes obey the same rules as the customer's and are recorded with the admin's name.
 - The admin page shows when the scheduler last ran (and warns when it has stopped), the cron command to set it up, and a Run Renewals Now button.
 
+[1.0.2]: https://github.com/dbltoe/Subscriptions/releases/tag/v1.0.2
 [1.0.1]: https://github.com/dbltoe/Subscriptions/releases/tag/v1.0.1
 [1.0.0]: https://github.com/dbltoe/Subscriptions/releases/tag/v1.0.0

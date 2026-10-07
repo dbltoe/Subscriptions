@@ -15,7 +15,7 @@
  * @license  http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  */
 
-$subsPluginDir = 'zc_plugins/Subscriptions/v1.0.1/';
+$subsPluginDir = 'zc_plugins/Subscriptions/v1.0.2/';
 $subsReadmeUrl = (defined('DIR_WS_CATALOG') ? DIR_WS_CATALOG : '/') . $subsPluginDir . 'readme.html';
 $subsGithubUrl = 'https://github.com/dbltoe/Subscriptions';
 $subsForumUrl = 'https://www.zen-cart.com/threads/207379';
@@ -32,7 +32,7 @@ $subsLinks = '<div style="margin:10px 0 0;padding:0 0 0 ' . $subsGap . '">'
     . '</div>';
 
 return [
-    'pluginVersion' => 'v1.0.1',
+    'pluginVersion' => 'v1.0.2',
     'pluginName' => 'Subscriptions',
     'pluginDescription' =>
         'Sell products as subscriptions. Customers choose a one-time purchase or a delivery '
@@ -41,9 +41,9 @@ return [
         . 'any payment module.'
         . $subsLinks,
     'pluginAuthor' => 'My Zen Cart Host (dbltoe)',
-    // Plugins Library id. 0 until the Library assigns one (submissions are on
-    // hold); it must be set before the first store installs from the Library.
-    'pluginId' => 0,
+    // Plugins Library id, assigned 2026-10-06 (the listing's first number was
+    // 2265). Unquoted: the Library's packaging only rewrites a bare integer.
+    'pluginId' => 2463,
     'zcVersions' => ['v158', 'v200', 'v210', 'v220', 'v230', 'v300'],
     'changelog' => 'changelog.txt',
     'github_repo' => $subsGithubUrl,

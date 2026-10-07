@@ -33,7 +33,7 @@
 - **Products' Options' Stock Manager (POSM):** works; the plugin keeps the catalog product name rather than POSM's decorated order-line name ("[In Stock]").
 - **Edit Orders:** renewal orders are ordinary checkout orders. Editing a renewal order doesn't change the subscription.
 
-## Limits in 1.0.1
+## Limits in 1.0.2
 
 - No automatic charging in the free plugin. Subscriptions Pro adds it, through Authorize.Net.
 - No free or paid trials, prepaid terms, or swapping products in a running subscription.

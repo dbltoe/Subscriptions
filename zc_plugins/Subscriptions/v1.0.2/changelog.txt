@@ -1,6 +1,17 @@
 Subscriptions -- changelog
 ==========================
 
+v1.0.2
+------
+- Changed: the Plugin ID is now 2463, the ID the Zen Cart Plugins
+  Library assigned on 6 October 2026, so Plugin Manager's update check
+  asks about this plugin. No code, settings, data or email change.
+- Upgrade in Plugin Manager. On Zen Cart 1.5.8 through 2.1.x Plugin
+  Manager keeps the ID it recorded at install; to set it there, run
+  UPDATE plugin_control SET zc_contrib_id = 2463
+  WHERE unique_key = 'Subscriptions';
+  in Admin > Tools > Install SQL Patches. It isn't required.
+
 v1.0.1
 ------
 - Fixed: Upgrade in Plugin Manager stopped with "Cannot redeclare
