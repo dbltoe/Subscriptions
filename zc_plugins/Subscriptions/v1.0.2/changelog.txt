@@ -5,7 +5,14 @@ v1.0.2
 ------
 - Changed: the Plugin ID is now 2463, the ID the Zen Cart Plugins
   Library assigned on 6 October 2026, so Plugin Manager's update check
-  asks about this plugin. No code, settings, data or email change.
+  asks about this plugin.
+- Changed: Plugin Manager has a Settings button once the plugin is
+  installed; it opens Configuration > Subscriptions. The installer
+  saves the panel again at Install, Upgrade and Uninstall, because
+  1.5.8, 2.0 and 2.1 keep the panel they first saw.
+- Changed: the buttons are one row, ReadMe | Settings | Forum Thread |
+  GitHub, a little narrower so all four fit on one line.
+- No storefront, settings, data or email change.
 - Upgrade in Plugin Manager. On Zen Cart 1.5.8 through 2.1.x Plugin
   Manager keeps the ID it recorded at install; to set it there, run
   UPDATE plugin_control SET zc_contrib_id = 2463

@@ -103,6 +103,8 @@ class ScriptedInstaller extends ScriptedInstallBase
         // every product's Delivery rows from the saved settings.
         $attributes->setConfig('SUBSCRIPTIONS_APPLIED', '');
 
+        $this->subsRefreshPluginDescription();
+
         $this->subsLog('Subscriptions: installed/upgraded.');
         return true;
     }
@@ -142,8 +144,35 @@ class ScriptedInstaller extends ScriptedInstallBase
         }
         $this->executeInstallerSql("DELETE FROM " . TABLE_CONFIGURATION . " WHERE " . $keep . "configuration_key LIKE 'SUBSCRIPTIONS\\_%'");
 
+        $this->subsRefreshPluginDescription();
+
         $this->subsLog('Subscriptions: uninstalled' . ($deleteData ? ', data deleted.' : ', subscription data kept.'));
         return true;
+    }
+
+    /**
+     * Save the manifest's description again, now that the Settings page has
+     * been registered (install, upgrade) or removed (uninstall).
+     *
+     * v1.5.8, v2.0 and v2.1 store plugin_control.description only when Plugin
+     * Manager first sees the plugin, before Install, so the Settings button
+     * would never appear there otherwise. v2.2+ rewrite it from the manifest on
+     * every Plugin Manager visit, so this is a no-op there in effect.
+     */
+    protected function subsRefreshPluginDescription(): void
+    {
+        if (!defined('TABLE_PLUGIN_CONTROL')) {
+            return;
+        }
+        $manifest = require dirname(__DIR__) . '/manifest.php';
+        if (!is_array($manifest) || !isset($manifest['pluginDescription'])) {
+            return;
+        }
+        $this->executeInstallerSql(
+            "UPDATE " . TABLE_PLUGIN_CONTROL
+            . " SET description = '" . $this->dbConn->prepare_input($manifest['pluginDescription']) . "'"
+            . " WHERE unique_key = 'Subscriptions' LIMIT 1"
+        );
     }
 
     /**

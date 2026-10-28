@@ -1,10 +1,14 @@
 # Changelog
 
-## [1.0.2] - 2026-10-06
+## [1.0.2] - 2026-10-27
 
 ### Changed
 
-- The Plugin ID is now 2463, the ID the Zen Cart Plugins Library assigned on 6 October 2026, so Plugin Manager's update check asks about this plugin. No code, settings, data or email changes; upgrading is optional and only matters for update notices.
+- The Plugin ID is now 2463, the ID the Zen Cart Plugins Library assigned on 6 October 2026, so Plugin Manager's update check asks about this plugin.
+- Plugin Manager has a Settings button. Once the plugin is installed, its info panel has a Settings button that opens Configuration > Subscriptions directly. It isn't shown before Install or after Uninstall. On 1.5.8, 2.0 and 2.1, which keep the panel they first saw, the installer saves it again at Install, Upgrade and Uninstall.
+- The buttons are one row, ReadMe | Settings | Forum Thread | GitHub, a little narrower so all four fit on one line from a 1366px-wide window up ("Read Me" is now "ReadMe" and "Forum Support Thread" is now "Forum Thread").
+
+Nothing changes on the storefront, in the settings, in the data or in the emails.
 
 Upgrade in Plugin Manager: upload the v1.0.2 folder beside v1.0.1, click Upgrade, then Upgrade again on the confirmation screen. On Zen Cart 2.2 and later Plugin Manager picks up the new ID by itself. On 1.5.8 through 2.1.x it records the ID only when it first sees the plugin; to set it there, run `UPDATE plugin_control SET zc_contrib_id = 2463 WHERE unique_key = 'Subscriptions';` in Admin > Tools > Install SQL Patches, which adds your table prefix itself (in phpMyAdmin, add the prefix to `plugin_control`). It isn't required.
 
