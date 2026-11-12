@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.3] - 2026-11-11
+
+### Changed
+
+- **License: GNU General Public License, version 3** (was version 2).
+- **readme.html is replaced by README.md.** The ReadMe button in Plugin Manager opens it inside the admin, for superusers only, in its own window (`index.php?cmd=subscriptions_readme`); it is no longer a public file under `zc_plugins/`. The same README.md is at the root of the download.
+
+Nothing changes on the storefront, in the settings, in the data or in the emails.
+
+Upgrade in Plugin Manager: upload the v1.0.3 folder beside the old one, click Upgrade, then Upgrade again on the confirmation screen. Your settings and subscriptions are kept.
+
 ## [1.0.2] - 2026-10-27
 
 ### Changed
@@ -44,6 +55,7 @@ The first release: subscriptions with pay-link renewals, for Zen Cart 1.5.8 thro
 - Admin actions: Skip Next Delivery, Pause / Resume, Change Date (the next delivery) and Cancel Subscription with an optional reason, each optionally confirmed to the customer by the same email they'd get doing it themselves. The admin's changes obey the same rules as the customer's and are recorded with the admin's name.
 - The admin page shows when the scheduler last ran (and warns when it has stopped), the cron command to set it up, and a Run Renewals Now button.
 
+[1.0.3]: https://github.com/dbltoe/Subscriptions/releases/tag/v1.0.3
 [1.0.2]: https://github.com/dbltoe/Subscriptions/releases/tag/v1.0.2
 [1.0.1]: https://github.com/dbltoe/Subscriptions/releases/tag/v1.0.1
 [1.0.0]: https://github.com/dbltoe/Subscriptions/releases/tag/v1.0.0

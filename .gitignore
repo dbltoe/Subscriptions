@@ -23,6 +23,6 @@ dist/
 
 # Maintainer tooling -- kept local, never shipped.
 # The release package excludes these anyway (tools/build_package.ps1 copies only
-# the plugin, docs/ and readme.html), so this keeps them out of the repo as well.
+# the plugin, docs/ and README.md), so this keeps them out of the repo as well.
 tests/
 tools/
